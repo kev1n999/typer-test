@@ -1,1 +1,1 @@
-URL = "https://www.typing.com/student/tests"
+URL = "https://www.typing.com/student/typing-test"
