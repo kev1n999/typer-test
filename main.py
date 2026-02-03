@@ -37,8 +37,22 @@ def get_test_route() -> str:
 
   return test_routes.get(option)
 
+def start_test(driver: webdriver.Chrome) -> None:
+  try:
+    continue_button = WebDriverWait(driver, 10).until(
+      EC.presence_of_element_located((By.XPATH, "//button[normalize-space()='Continue']"))
+    )
+
+    if EC.element_to_be_clickable(continue_button):
+      continue_button.click()
+      print("You're in the test!")
+
+  except:
+    raise Exception("An error ocurred to start the test!")
+  
 if __name__ == "__main__":
   test_route = get_test_route()
   driver = webdriver.Chrome()
   open(driver, URL + test_route)
+  start_test(driver)
   characters_parser(driver)
