@@ -1,12 +1,14 @@
-import time
 import pyautogui
+from pyfiglet import Figlet
 from selenium import webdriver
 from config.constants import URL
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
+from console import fg
 
+# Routes to available tests
 test_routes = {
   1:"/1-minute",
   2: "/3-minute",
@@ -16,11 +18,13 @@ test_routes = {
   6: "/3-page",
 }
 
+# Function to open in the url test
 def open(driver: webdriver.Chrome, url: str) -> None:
   driver.get(url)
   assert "minute" in url or "page" in url, "Invalid page!"
   assert "typing" in driver.title.lower(), "An error ocurred to open!"
 
+# Function to fetch active and current letter and press it with keyboard
 def fetch_words(driver: webdriver.Chrome) -> None:
   class_name = "screenBasic-word"
   current_word = ""
@@ -42,18 +46,20 @@ def fetch_words(driver: webdriver.Chrome) -> None:
       letter = active.text
       if letter.isspace():
         pyautogui.press(["space"])
-        # A bug after that (The first letter of the next word doesn't works)
       else:
+        print(fg.green)
+        print(letter, end="", flush=True)
         pyautogui.press(letter)
-        print(letter, end=" ")
     except Exception as err:
       print(f"An error ocurred to try typing: {err}")
 
 def get_test_route() -> str:
-  print("[1] => 1 minute\n[2] 3 minutes\n[3] 5 minutes")
-  print("[4] => 1 page\n[5] => 2 pages\n[6] => 3 pages")
+  print(fg.green)
+  print("[1] => 1 minute test\n[2] => 3 minutes test\n[3] => 5 minutes test")
+  print("[4] => 1 page test\n[5] => 2 pages test\n[6] => 3 pages test")
 
-  option = int(input("\n[choice a option] _: "))
+  print(fg.yellow)
+  option = int(input("\n[choice a option] ==> "))
 
   return test_routes.get(option)
 
@@ -70,6 +76,9 @@ def start_test(driver: webdriver.Chrome) -> None:
     raise Exception("An error ocurred to start the test!")
 
 if __name__ == "__main__":
+  f = Figlet(font="drpepper")
+  print(fg.blue)
+  print(f.renderText("Typer Hack"))
   test_route = get_test_route()
   driver = webdriver.Chrome()
   open(driver, URL + test_route)
