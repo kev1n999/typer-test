@@ -78,7 +78,7 @@ def start_test(driver: webdriver.Chrome) -> None:
 if __name__ == "__main__":
   f = Figlet(font="drpepper")
   print(fg.blue)
-  print(f.renderText("Typer Hack"))
+  print(f.renderText("Typer Test"))
   test_route = get_test_route()
   driver = webdriver.Chrome()
   open(driver, URL + test_route)
