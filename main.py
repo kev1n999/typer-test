@@ -42,11 +42,10 @@ def fetch_words(driver: webdriver.Chrome) -> None:
       letter = active.text
       if letter.isspace():
         pyautogui.press(["space"])
-        time.sleep(1)
         # A bug after that (The first letter of the next word doesn't works)
-
-      pyautogui.press(letter)
-      print(letter, end=" ")
+      else:
+        pyautogui.press(letter)
+        print(letter, end=" ")
     except Exception as err:
       print(f"An error ocurred to try typing: {err}")
 
