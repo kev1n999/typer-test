@@ -7,7 +7,6 @@
 - Selenium
 - PyAutoGUI
 - PyFiglet
-- CLI Box / Console Colors
 
 ## How to use
 1. Clone the repository
