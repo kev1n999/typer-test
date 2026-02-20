@@ -47,8 +47,6 @@ def fetch_words(driver: webdriver.Chrome) -> None:
       if letter.isspace():
         pyautogui.press(["space"])
       else:
-        print(fg.green)
-        print(letter, end="", flush=True)
         pyautogui.press(letter)
     except Exception as err:
       print(f"An error ocurred to try typing: {err}")
